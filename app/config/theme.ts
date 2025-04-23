@@ -3,7 +3,7 @@ import { createColoring } from "dappkit";
 export default {
 	default: {
 		base: createColoring(
-			["#8B8D98", "#9984D2", "#000000"],
+			["#DD3C44", "#8B8D98", "#000000"],
 			["#8B8D98", "#9984D2", "#FFFFFF"],
 		),
 		info: createColoring(
