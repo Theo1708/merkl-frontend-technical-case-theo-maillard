@@ -1,5 +1,12 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Box, Container, Text, Title } from "dappkit";
+import { Box, Container, createTable, Text } from "dappkit";
+import SignIn from "~/components/SignIn";
+import ChainSelector from "~/components/ChainSelector";
+import OpportunitiesTable from "~/components/OpportunitiesTable";
+import { getMerklOpportunities } from "~/APIs/Merkl.api";
+import { useEffect, useState } from "react";
+import TokenFilter from "~/components/TokenFilter";
+import ColumnSorting from "~/components/ColumnSorting";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -10,11 +17,14 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
 	return (
-		<Container className="bg-main-1 flex justify-center h-full items-center">
-			<Box>
-        <Title h={3}>Merkl Technical Case</Title>
-				<Text>It's so empty here...</Text>
-			</Box>
-		</Container>
+	  <Container className="flex flex-col gap-xl p-xl">
+		<Box className="flex-row justify-between items-center">
+		  <ChainSelector />
+		  <SignIn />
+		</Box>
+		<TokenFilter />
+		<ColumnSorting />
+		<OpportunitiesTable/>
+	  </Container>
 	);
 }

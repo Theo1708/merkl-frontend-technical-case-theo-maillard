@@ -64,7 +64,7 @@ export default function App() {
 			sizing={sizing}
 			chains={chains}
 		>
-			<div className="bg-main-1 h-[100vh]">
+			<div className="bg-main-1 min-h-[100vh]">
 				<Outlet />
 			</div>
 		</DAppProvider>
