@@ -13,9 +13,27 @@ export async function getMerklUser(address: string) {
   }
 }
 
-export async function getMerklOpportunities(tokens : string | null, column: string | null, order: Order, chain: string | null) {
+export async function getMerklOpportunitiesCount(tokens : string | null, chain: string | null) {
+  const query = {} as any;
+  if (tokens) { query.tokens = tokens}
+  if (chain) {query.chainId = chain}
+
+  try {
+    const opportunities = await merkl.opportunities.count.get({
+      query,
+    });
+    return opportunities.data || 0;
+  } catch (error) {
+    console.log("Error fetching opportunities:", error);
+    return 0;
+  }
+}
+
+export async function getMerklOpportunities(tokens : string | null, column: string | null, order: Order, chain: string | null, page: number, items: number) {
   const query = {
-    order: order,
+    order,
+    page,
+    items
   } as any;
 
   if (tokens) {

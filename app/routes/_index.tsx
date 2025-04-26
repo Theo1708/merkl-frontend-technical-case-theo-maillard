@@ -1,10 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Box, Container, createTable, Text } from "dappkit";
+import { Box, Container } from "dappkit";
 import SignIn from "~/components/SignIn";
 import ChainSelector from "~/components/ChainSelector";
 import OpportunitiesTable from "~/components/OpportunitiesTable";
-import { getMerklOpportunities } from "~/APIs/Merkl.api";
-import { useEffect, useState } from "react";
 import TokenFilter from "~/components/TokenFilter";
 import ColumnSorting from "~/components/ColumnSorting";
 
