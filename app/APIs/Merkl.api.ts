@@ -56,3 +56,13 @@ export async function getMerklOpportunities(tokens : string | null, column: stri
     return [];
   }
 }
+
+export async function getMerklTokensReward(chainId : string) {
+  const tokensReward = await merkl.tokens.reward({chainId}).get()
+  return tokensReward.data
+}
+
+export async function getMerklUserRewards(address : string, chainId : string | number) {
+  const userRewards = await merkl.users({ address }).rewards.get({ query : { chainId : [Number(chainId)] }})
+  return userRewards.data
+}

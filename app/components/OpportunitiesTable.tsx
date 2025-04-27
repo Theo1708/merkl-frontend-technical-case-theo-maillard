@@ -49,16 +49,20 @@ export default function OpportunitiesTable() {
 		<>
 			<Paginator />
 			<Table responsive>
-			{opportunities.map((opp, index) => (
+			{opportunities.map((opportunity, index) => (
 				<Row
-				key={index}
-				nameColumn={<Text>{opp.name}</Text>}
-				aprColumn={<Text>{opp.apr.toFixed(2)}</Text>}
-				tvlColumn={<Text>{opp.tvl.toFixed(2)}</Text>}
+					key={index}
+					nameColumn={<Text>{opportunity.name}</Text>}
+					aprColumn={<Text>{opportunity.apr.toFixed(2)}</Text>}
+					tvlColumn={<Text>{opportunity.tvl.toFixed(2)}</Text>}
 				/>
 			))}
 			</Table>
-			<Paginator />
+			{ pagination.totalItems ?
+				<Paginator />
+				:
+				<Text className="m-xl">No opportunities found, adjust filters</Text>
+			}
 		</>
 	);
 }

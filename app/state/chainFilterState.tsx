@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 type ChainFilterState = {
-  selectedChain: string | null;
-  setSelectedChain: (chain: string | null) => void;
+  selectedChain: string;
+  setSelectedChain: (chain: string) => void;
 };
 
 export const useChainFilterStore = create<ChainFilterState>((set) => ({
