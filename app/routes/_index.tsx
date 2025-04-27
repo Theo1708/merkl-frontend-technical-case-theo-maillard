@@ -5,6 +5,7 @@ import ChainSelector from "~/components/ChainSelector";
 import OpportunitiesTable from "~/components/OpportunitiesTable";
 import TokenFilter from "~/components/TokenFilter";
 import ColumnSorting from "~/components/ColumnSorting";
+import UserRewards from "~/components/UserRewards";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -20,6 +21,7 @@ export default function Index() {
 		  <ChainSelector />
 		  <SignIn />
 		</Box>
+		<UserRewards />
 		<TokenFilter />
 		<ColumnSorting />
 		<OpportunitiesTable/>

@@ -1,48 +1,50 @@
 import { useState } from "react";
-import { Box, Input, Button, Text, Container } from "dappkit";
+import { Box, Input, Button, Text } from "dappkit";
 import { getMerklUser } from "~/APIs/Merkl.api";
+import { useSignInStore } from "~/state/signInState";
 
 export default function SignIn() {
-  const [signedIn, setSignedIn] = useState(false);
+  const { userAddress, setUserAddress, logOut } = useSignInStore();
   const [checking, setChecking] = useState(false);
-  const [userAddress, setUserAddressRaw] = useState<string | undefined>();
+  const [userNewAddress, setUserNewAddressRaw] = useState<string | undefined>();
 
-  const setUserAddress = (v: string | undefined) => {
-    setUserAddressRaw(v ?? undefined);
+  const setUserNewAddress = (v: string | undefined) => {
+    setUserNewAddressRaw(v ?? undefined);
   };
 
   const signIn = async () => {
-    if (!userAddress || userAddress.trim() === "") {
+    if (!userNewAddress || userNewAddress.trim() === "") {
       alert("Please enter a wallet address");
       return;
     }
 
     setChecking(true);
-    const { connected } = await getMerklUser(userAddress.trim());
+    const { connected } = await getMerklUser(userNewAddress.trim());
     setChecking(false);
 
     if (connected) {
-      setSignedIn(true);
+      setUserAddress(userNewAddress.trim())
+      setUserNewAddress(undefined)
     } else {
       alert("Address not found.");
     }
   };
 
-  const logOut = () => {
-    setSignedIn(false);
-    setUserAddress(undefined);
-  };
-
   return (
     <Box className="flex-row gap-4 items-end">
-      {!signedIn ? (
+      {!userAddress ? (
         <>
           <Input
             look="base"
             size="sm"
             label="Wallet Address"
             placeholder="Connect your wallet address"
-            state={[userAddress, setUserAddress]}
+            state={[userNewAddress, setUserNewAddress]}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                signIn();
+              }
+            }}
             hint="Enter your Ethereum wallet address"
           />
           <Button
